@@ -186,15 +186,4 @@ footer nav ul {
 	margin: 2em
 }
 
-#modification {
-	display: none;
-	border: none;
-	background-color: transparent;
-	padding-top: 10px;
-	gap: 10px;
-	cursor: pointer;
-}
 
-#modification:hover {
-	color: #b1663c;
-}
