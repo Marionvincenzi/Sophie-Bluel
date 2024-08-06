@@ -125,6 +125,39 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
+
+.divBtn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	margin: 51px 0 50px 0;
+  }
+  
+  .divBtn button {
+	width: auto;
+	height: 37px;
+	border-radius: 60px;
+	border: 1px solid #1d6154;
+	padding: 9px 15px;
+	color: #1d6154;
+	background-color: #fffef8;
+	font-family: "Syne";
+	font-size: 16px;
+	font-weight: 700;
+  }
+  
+  .divBtn button:hover {
+	cursor: pointer;
+	background-color: #1d6154;
+	transition: background-color 0.9s ease;
+	color: #fff;
+  }
+  
+  .divBtn .active {
+	background-color: #1d6154;
+	color: #fff;
+  }
 .gallery {
 	width: 100%;
 	display: grid;
@@ -186,32 +219,196 @@ footer nav ul {
 	margin: 2em
 }
 
-.filters {
-    min-width: 550px;
-    width: 50%;
+
+/*********/
+/*********** PAGE LOGIN***********/
+body {
+	font-family: 'Work Sans',sans-serif;
+	font-size: 14px;
+	background-color: #FFFCf6;
+	padding: 0;
+}
+
+header {
+	display: flex;
+	justify-content: space-between;
+	margin: 50px auto;
+	max-width: 1440px;
+	padding: 0 20px;
+}
+
+header a {
+	text-decoration: none;
+}
+
+main {
+	max-width: 1140px;
+	margin: 50px auto;
+	padding: 0 20px;
+}
+
+h1 {
+	display: flex;
+	flex-direction: column;
+	font-family: 'Syne', sans-serif;
+	font-size: 22px;
+	font-weight: 800;
+	color: #B1663C;
+}
+
+h1>span{
+	font-family: 'Work', sans-serif;
+	font-size: 10px;
+	letter-spacing: 0.1em;
+}
+
+h2 {
+	font-family: 'Syne', sans-serif;
+	font-weight: 700;
+	font-size: 30px;
+	color: #1D6154;
+	text-align: center;
+}
+
+nav ul {
+	display: flex;
+	align-items: center;
+	list-style-type: none;
+	cursor: pointer;
+}
+
+nav li {
+	padding: 0 10px;
+	font-size: 1.2em;
+}
+
+li a {
+	text-decoration: none;
+	color: black;
+}
+
+li:hover {
+	color: #B1663C;
+}
+
+.form {
+	width: 50%;
+	margin: auto;
+}
+
+.form>* {
+	text-align: center;
+}
+
+.form h2 {
+	margin-bottom: 20px;
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 30px;
+	color: #1D6154;
+	text-align: center;
+}
+
+.form form {
+	text-align: left;
+	margin-top: 30px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.form input {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	width: 100%;
+	max-width: 400px;
+	margin: 10px 0;
+	display: block;
+}
+
+button[type="submit"] {
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin: 20px auto;
+	width: 180px;
+	height: 40px;
+	text-align: center;
+	border-radius: 60px;
+	display: block;
+}
+
+#email {
+	color: #1D6154;
+	font-weight: bold;
+	outline: none;
+}
+
+.loginError {
+	margin-top: 15px;
+	text-align: center;
+	color:red;
+	font-weight: bold;
+	font-size: 1.5rem;
+}
+.passwordError {
+	margin-top: 15px;
+	text-align: center;
+	color: red;
+	font-weight: bold;
+	font-size: 1.5rem;
+}
+
+#password {
+	color: #1D6154;
+	outline: none;
+}
+
+#password:focus {
+	border: 2px solid #1D6154;
+	border-radius: 5px;
+}
+
+.forgotPassword {
+	text-decoration: none;
+}
+.form a {
+	display: block;
+	text-align: center;
+	margin-top: 20px;
+	color: #1D6154;
+	text-decoration: none;
+}
+
+.form a:hover {
+	text-decoration: underline;
+}
+
+footer {
+    width: 100%;
+    text-align: right;
+    margin-top: 50px;
+}
+footer nav ul {
     display: flex;
-    justify-content: space-evenly;
-    margin: 35px auto;
+    justify-content: flex-end;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
 }
-.filterButton {
-    padding: 10px;
-    border: 1px solid #1D6154;
-    border-radius: 25px;
-    font-family: 'Syne';
+footer nav ul li {
+    font-size: 14px;
     color: #1D6154;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
+    margin-top: 5cm;
 }
-.filterButton:hover {
-    background-color: #1D6154;
-    color: white;
-}
-.btnAll.active {
-	padding: 10px;
-    border: 1px solid #1D6154;
-    border-radius: 25px;
-    font-family: 'Syne';
-    color: #1D6154;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-}
+
+
+
+
+
+
+
+

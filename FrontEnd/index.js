@@ -63,8 +63,9 @@ function displayfilters(categories) {
     divBtn.classList.add("divBtn");
     title.insertBefore(divBtn, subTitle);
 
+    const gallery = document.querySelector(".gallery")
     const btnAll = document.createElement("button");
-    btnAll.classList.add("btnAlll");
+    btnAll.classList.add("filterButton","btnAll");
     btnAll.classList.add("active");
     btnAll.innerText = "TOUS";
     btnAll.addEventListener("click", () => {
