@@ -5,6 +5,7 @@ const inputPassword = document.getElementById("password");
 const form = document.getElementById("loginForm");
 const loginError = document.querySelector(".loginError");
 const passwordError = document.querySelector(".passwordError");
+const submitButton = document.querySelector("button[type='submit']");
 
 const logUser = {
     email: "",
@@ -22,7 +23,7 @@ form.addEventListener("submit", (e) => {
 // EVENEMENT AU MAIL
 
 inputEmail.addEventListener("input", (e) => {
-    logUser.email = inputEmail.value;
+    logUser.email = e.target.value;
     inputEmail.style.color ="";
     loginError.textContent ="";
 });
@@ -32,7 +33,12 @@ inputPassword.addEventListener("input", (e) => {
     logUser.password = e.target.value;
     inputPassword.style.color = "";
     passwordError.textContent = "";
-})
+});
+
+const isAuth = sessionStorage.getItem('authToken');
+loginLink.style.display = isAuth ? 'none' : 'block';
+logoutLink.style.display = isAuth ? 'block' : 'none';
+document.getElementById('')
 
 //EVENEMENT AU CHARGEMENT DU DOM
 
@@ -45,6 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
 //FETCH ROUTE USER
 
 async function loginUser() {
+    submitButton.disabled = true;
     try {
        const response = await fetch(loginUrl, {
             method: "POST",
@@ -57,6 +64,27 @@ async function loginUser() {
         const data = await response.json();
         console.log(data);
         
+        if (response.ok) {
+            inputPassword.style.color = "#1d6154";
+            passwordError.textContent = "";
+            loginError.textContent = "";
+            console.log("LogAdmin OK");
+
+            localStorage.setItem("token", data.token);
+             window.location.href = "../index.html"
+        }else {
+            handleErrors(data)
+        }
+     } catch (error) {
+        console.log(error);
+        loginError.textContent = "Une errreur s'est produite. Veuillez réessayer."
+     } finally {
+        submitButton.disabled = false;
+     }
+}
+     function handleErrors(data) {
+        
+     
         
         if (data.message) {
             loginError.textContent = "Erreur dans l'identifiant !!";
@@ -66,17 +94,8 @@ async function loginUser() {
             inputPassword.style.color = "red";
             inputEmail.style.color = "#1d6154";
         } else {
-            inputPassword.style.color ="#1d6154";
-            passwordError.textContent = "";
-            loginError.textContent = "";
-            console.log("LogAdmin OK");
-
-            localStorage.setItem("token", data.token);
-
-            window.location.href = "../index.html"
+          
+            loginError.textContent = "Une erreur inconnue s'est produite";
+            
+         }  
         }
-
-    } catch (error) {
-        console.log(error);
-    }
-}
