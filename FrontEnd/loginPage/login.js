@@ -1,8 +1,11 @@
 //****LOGIN */
+console.log("login.js chargé");
+
 const loginUrl = "http://localhost:5678/api/users/login";
 const inputEmail = document.getElementById("email");
 const inputPassword = document.getElementById("password");
 const form = document.getElementById("loginForm");
+const loginSection = document.getElementById("loginForm");
 const loginError = document.querySelector(".loginError");
 const passwordError = document.querySelector(".passwordError");
 const submitButton = document.querySelector("button[type='submit']");
@@ -17,6 +20,8 @@ const logUser = {
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
+    logUser.email = inputEmail.value;
+    logUser.password = inputPassword.value;
     loginUser();
 });
 
@@ -35,14 +40,17 @@ inputPassword.addEventListener("input", (e) => {
     passwordError.textContent = "";
 });
 
-const isAuth = sessionStorage.getItem('authToken');
-loginLink.style.display = isAuth ? 'none' : 'block';
-logoutLink.style.display = isAuth ? 'block' : 'none';
-document.getElementById('')
-
 //EVENEMENT AU CHARGEMENT DU DOM
 
 document.addEventListener("DOMContentLoaded", () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+        window.location.href = "../index.html"
+    } else {
+
+        loginSection.style.display = "block";
+    }
+    
     logUser.email = inputEmail.value;
     logUser.password = inputPassword.value;
     console.log(logUser);
@@ -65,11 +73,6 @@ async function loginUser() {
         console.log(data);
         
         if (response.ok) {
-            inputPassword.style.color = "#1d6154";
-            passwordError.textContent = "";
-            loginError.textContent = "";
-            console.log("LogAdmin OK");
-
             localStorage.setItem("token", data.token);
              window.location.href = "../index.html"
         }else {
@@ -82,10 +85,7 @@ async function loginUser() {
         submitButton.disabled = false;
      }
 }
-     function handleErrors(data) {
-        
-     
-        
+     function handleErrors(data) {   
         if (data.message) {
             loginError.textContent = "Erreur dans l'identifiant !!";
             inputEmail.style.color = "red";
@@ -99,3 +99,9 @@ async function loginUser() {
             
          }  
         }
+
+      
+
+
+    
+    

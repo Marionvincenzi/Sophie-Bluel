@@ -19,22 +19,6 @@ async function getWorks() {
     }
 }
 
-//Fonction pour récupérer les catégories 
-async function getCategories() {
-    try {
-        const response = await fetch(urlCategories);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status ${response.status}`);
-        }
-        const dataCategories = await response.json();
-        console.log(dataCategories);
-        return dataCategories
-    } catch (error) {
-        console.error("Erreur lors de la récupération des catégories :", error);
-        return[];
-    }
-}
-
 //Fonction pour afficher les travaux 
 function displayWorks(works) {
     const gallery = document.querySelector(".gallery");
@@ -54,6 +38,23 @@ function displayWorks(works) {
         gallery.appendChild(figure);
     });
 }
+
+//Fonction pour récupérer les catégories 
+async function getCategories() {
+    try {
+        const response = await fetch(urlCategories);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status ${response.status}`);
+        }
+        const dataCategories = await response.json();
+        console.log(dataCategories);
+        return dataCategories
+    } catch (error) {
+        console.error("Erreur lors de la récupération des catégories :", error);
+        return[];
+    }
+}
+
 
 
 //Fonction pour afficher les filtres
@@ -75,6 +76,19 @@ function displayfilters(categories) {
     });
     divBtn.appendChild(btnAll);
 
+    function handleFilterButton(button) {
+        document.querySelectorAll(".filterButotn").forEach(btn => btn.classList.remove("active"));
+        button.classList.add("active");
+
+    btnAll.addEventListener("click", () => {
+        handleFilterButton(btnAll);
+        gallery.innerHTML = "";
+        getWorks().then(displayWorks);
+        })
+    }
+
+    
+
     categories.forEach(category => {
         const btn = document.createElement("button");
         btn.classList.add("filterButton");
@@ -90,22 +104,6 @@ function displayfilters(categories) {
     });
 }
 
-function loginLogout() {
-    const loginLink = document.getElementById('only-guest');
-    const logoutLink = document.getElementById('nav-logout');
-    const isAuth = document.getElementById('authToken');
-    loginLink.style.display = isAuth ? 'none' : 'block';
-    logoutLink.style.display = isAuth ? 'block' : 'none';
-    document.getElementById('banner-modifier').style.display = isAuth ? 'flex' : 'none';
-    document.getElementById('').style.display = isAuth ? 'flex' : 'none';
-    document.getElementById('').style.display = isAuth ? 'none' : 'flex';
-
-}
-
-document.getElementById('nav-logout');
-e.preventDefault();
-localStorage.removeItem('authToken');
-window.location.href = 'index.html';
 
 
 //Fonction principale pour récupérer les données et les afficher
@@ -135,22 +133,18 @@ function createAllButtons() {
     });
   }
 
-  //Fonction pour créer un bouton de filtre 
-//   function createButton(category) {
-//     const containerFiltres = document.querySelector(".filters");
-//     const btn = document.createElement("button");
-//     btn.classList.add("buttons-filtres");
-//     btn.textContent = category.name;
-//     btn.id = category.id;
-//     containerFiltres.appendChild(btn);
-//     btn.addEventListener("click", () => {
-//         document.querySelector(".gallery").innerHTML = "";
-//         getWorks().then(works => {
-//             const filterWorks = works.filter(work => work.categoryId === category.id);
-//             displayWorks(filterWorks);
-//         });
-//     });
-//   }
+  document.addEventListener("DOMContentLoaded", () => {
+    const token = localStorage.getItem("token");
+    const addPhotoSection = document.getElementById("modal-edit");
 
+    
+    if (token) {
+        
+        addPhotoSection.style.display ="block";
+    } else {
+        addPhotoSection.style.display ="none";
+        }
+  });
 //Appel à la fonction principale 
 main();
+

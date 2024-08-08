@@ -405,7 +405,9 @@ footer nav ul li {
     margin-top: 5cm;
 }
 
-/*** Barre supérieure ***/
+
+
+
 
 .header-container {
 	display: flex;
@@ -461,59 +463,236 @@ footer nav ul li {
 	margin-left: 20px;
 }
 
-/* .hidden {
-	display: none !important;
-} */
-/*CSS pour le mode admin uniquement*/
-body.connected .only-guest {
-    display: none;
-}
 
-body.connected .only-admin {
-    display: block;
-}
+/*CSS pour le mode admin uniquement*/
 
 /* Style première modal */
+.modal-overlay {
+	background: rgba(0, 0, 0, 0.07) ;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
 
-.modal {
-	display: flex;
-	flex-direction: column;
-	border-radius: 10px;
-	background-color: white;
+.modal-wrapper {
+	margin-top: 20px;
+	width: 580px;
+	height: 700px;
+	background: white;
 	position: fixed;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	z-index: 2;
-	padding: 30px;
+	border-radius: 2%;
 }
 
-.project {
-	position: relative;
-	padding-bottom: 10px;
-	margin-right: 10px;
+.close-modal-btn {
+	font-size: large;
+	cursor: pointer;
+	border: none;
+	background-color: transparent;
 }
 
-.gallery-modal-container {
+.arrow-modal-btn {
+	font-size: large;
+	cursor: pointer;
+	border: none;
+	background-color: transparent;
+	padding: 30px 30px 0;
+}
+
+.button-modal {
 	display: flex;
-	flex-wrap: wrap;
-	padding-left: 40px;
-	padding-right: 20px;
-	width: 400px;
+	justify-content: space-between;
+	flex-direction: row-reverse;
 }
 
-.gallery-title {
-	text-align: center;
-	padding-bottom: 30px;
-	color: #000;
-	font-size: 18px;
+.close-btn-wrapper {
+	display: flex;
+	justify-content: flex-end;
+	padding: 30px 30px 0;
 }
 
-.project-container {
-	position: relative;
+.modal-content {
+	margin: 20px auto;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	font-size: 1.3rem;
+}
+
+.hide {
+	display: none;
+}
+
+.modal-gallery figure {
 	display: inline-block;
+	margin: 5px;
+	width: 100px;
+	justify-content: center;
+	align-items: center;
 }
 
-.modal-project-image {
-	height: 115px;
+.modal-gallery img {
+	width: 100%;
+	height: auto;
 }
+
+.modal-gallery {
+	padding-left: 15px;
+	overflow: scroll;
+	max-height: 440px;
+}
+
+hr {
+	width: 80%;
+	margin-top: 15px;
+	margin-bottom: 40px;
+}
+
+.add-picture {
+	font-family: "Syne";
+	font-size: 1rem;
+	border-radius: 20px;
+	padding: 10px 45px;
+	background-color: #1D6154;
+	gap: 20px;
+	cursor: pointer;
+	color: white;
+	display: flex;
+}
+.button-add {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.hidden {
+	display: none;
+}
+
+#modal {
+	display: none;
+}
+/*Bouton supprimer */
+
+/* .modal-gallery figure {
+	position: relative;
+}
+
+.delete-button {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	border: none;
+	background-color: rgba(0, 0, 0, 0.07);
+	color: white;
+	font-size: 16px;
+	border-radius: 10%;
+	cursor: pointer;
+	padding: 4px 6px;
+}
+
+.new-modal {
+	background-color: transparent;
+}
+
+.new-content {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.add-image {
+	background-color: #e8f1f6;
+	width: 420px;
+	height: 190px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+}
+
+.add-image i {
+	font-size: 5rem;
+	color: #b9c5cc;
+	display: flex;
+	justify-content: center;
+}
+
+#imageUrl {
+	display: none;
+} */
+
+/* .btnAjout {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #b9c5cc;
+	border-radius: 50px;
+	height: 40px;
+	width: 200px;
+	font-size: 0.875rem;
+	color: #306685;
+	cursor: pointer;
+}
+
+.labelFormat {
+	color: #444444;
+	font-size: 0.625rem;
+}
+
+.form-group {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	padding-top: 50px;
+}
+
+.form-group input {
+	height: 51px;
+	border: #444444;
+	box-shadow: 1px 0px 10px 0px rgba(0, 0, 0, 0.15);
+}
+
+.formField {
+	height: 51px;
+	border: #444444;
+	box-shadow: 1px 0px 10px 0px rgba(0, 0, 0, 0.15);
+}
+
+.new-content hr {
+	width: 100%;
+	margin-top: 50px;
+	margin-bottom: 40px;
+} */
+/* 
+#boutonValidation {
+	font-family: "Syne";
+	font-size: 1rem;
+	border-radius: 20px;
+	padding: 10px 45px;
+	color: white;
+	display: block;
+	width: 250px;
+	margin: 5px auto;
+}
+
+#preview-image {
+	width: 100%;
+	height: 100%;
+	display: block;
+	object-fit: contain;
+} */
+
+/* .add-image .hidden {
+	display: none;
+} */
+
+
