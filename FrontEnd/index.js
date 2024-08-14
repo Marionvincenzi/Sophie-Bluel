@@ -25,11 +25,15 @@ function getWorks() {
     .then(response => response.json())
     .then(data => {
         console.log(data);
-        
+        displayWorks(data);
+    })
+    .catch(error => {
+        console.log(error)
     })
 }
 
 getWorks()
+
 //Fonction pour afficher les travaux 
 function displayWorks(works) {
     const gallery = document.querySelector(".gallery");
@@ -40,7 +44,7 @@ function displayWorks(works) {
         const img = document.createElement("img");
         const figcaption = document.createElement("figcaption");
 
-        // figure.classList.add(`figure-${work.id}`);
+        figure.classList.add(`figure-${work.id}`);
         img.src = work.imageUrl;
         img.alt = work.title || "Image";
         figcaption.innerText = work.title;
@@ -50,9 +54,10 @@ function displayWorks(works) {
         gallery.appendChild(figure);
     });
 }
-
 //Fonction pour récupérer les catégories 
 async function getCategories() {
+    const works = await getWorks();
+    const categories = await getCategories()
     try {
         const response = await fetch(urlCategories);
         if (!response.ok) {
@@ -121,20 +126,20 @@ function displayfilters(categories) {
 
 
 
-//Fonction principale pour récupérer les données et les afficher
-// async function main() {
-//     const works = await getWorks();
-//     displayWorks(works);
-//     const categories = await getCategories();
+// Fonction principale pour récupérer les données et les afficher
+async function main() {
+    const works = await getWorks();
+    displayWorks(works);
+    const categories = await getCategories();
 
-//     if (works.length > 0 && categories.length > 0) {
-//         console.log("Récupération des travaux et des catégories avec succès !");
-//         displayWorks(works);
-//         displayfilters(categories);
-//     } else {
-//         console.error("Une erreur s'est produite lors de la récupération des travaux er des catégories");
-//     }
-// }
+    if (works.length > 0 && categories.length > 0) {
+        console.log("Récupération des travaux et des catégories avec succès !");
+        displayWorks(works);
+        displayfilters(categories);
+    } else {
+        console.error("Une erreur s'est produite lors de la récupération des travaux er des catégories");
+    }
+}
 
   document.addEventListener("DOMContentLoaded", () => {
       const loginButton = document.getElementById("only-guest");
@@ -164,9 +169,6 @@ function displayfilters(categories) {
 
     }
 
-    // editButton.addEventListener('click', () => {
-    //     alert('Bouton modifier')
-    // })
 
     //Gestion du clic sur le bouton login
     loginButton.addEventListener("click", () => {
@@ -182,14 +184,15 @@ function displayfilters(categories) {
     });
 
     const addPhotoSection = document.getElementById("modal-edit");
+    addPhotoSection.style.display = token ? "block" : "none";
 
     
-    if (token) {
+    // if (token) {
         
-        addPhotoSection.style.display ="block";
-    } else {
-        addPhotoSection.style.display ="none";
-        }
+    //     addPhotoSection.style.display ="block";
+    // } else {
+    //     addPhotoSection.style.display ="none";
+    //     }
   });
 
 //Appel à la fonction principale 

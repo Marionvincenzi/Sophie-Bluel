@@ -13,7 +13,28 @@
     const categorySelect = document.getElementById("form-category");
 
     const token = localStorage.getItem("authToken");
+    const imageContainers = document.querySelectorAll('.image-container');
 
+    imageContainers.forEach(container => {
+        console.log("container trouvé");
+        
+        const deleteBtn = document.createElement("button");
+        deleteBtn.className = 'delete-btn';
+        deleteBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+        console.log("bouton de suppression créer");
+        
+
+        deleteBtn.addEventListener('click', () => {
+            console.log("bouton de suppression cliqué");
+            if (confirm ("Voulez vous vraiment supprimer cette photo?")) {
+                container.remove();
+            }
+            
+            
+        });
+
+        container.appendChild(deleteBtn)
+        })
     //Fonction pour afficher la modale 
     function showModal() {
         modalOverlay.classList.remove("hide");

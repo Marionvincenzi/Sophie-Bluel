@@ -504,11 +504,6 @@ footer nav ul li {
 	margin-right: 10px;
 }
 
-.image-container {
-	display: flex;
-	margin-left: 57px;
-	margin-top: 20px;
-}
 
 .edit-project-container {
 	display: flex;
@@ -525,6 +520,20 @@ footer nav ul li {
 /*CSS pour le mode admin uniquement*/
 
 /* Style première modal */
+.fa-solid.fa-arrow-left {
+	color: #000;
+	width: 21px;
+	height: 21px;
+	margin: 0 30px;
+}
+
+.fa-solid.fa-xmark {
+	color: #000;
+	width: 24px; 
+	height: 24px;
+	margin: 0 30px; 
+
+}
 .modal-overlay {
 	position: fixed;
 	top: 0;
@@ -579,27 +588,46 @@ footer nav ul li {
 	padding: 20px;
 	border-radius: 8px;
 	height: 102px;
-	max-width: 500px;
-	max-height: 80vh;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.01);
-	z-index: 1000;
+	z-index: 999;
 	position: relative;
 
 }
 
-.modal-content, .modal-content-new-category-title {
-	margin: 20px 0;
+.modal-content  {
+	margin-top: 50px;
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
-	gap: 10px;
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
 }
-
+.modal-content-new-category-title {
+	display: flex;
+	flex-direction: column;
+	margin: 0 105px;
+}
 .modal-content img.thumbnail {
-	width: 100px;
-	height: auto;
+	width: 77px;
+	height: 102px;
 	cursor: pointer;
 	object-fit: cover;
 	border-radius: 4px;
+}
+
+#title-form {
+	font-size: 14px;
+	margin-bottom: 10px;
+}
+
+#form-title {
+	width: 420px;
+	height: 50px;
+	margin-bottom: 20px;
+}
+
+#form-category {
+	width: 420px;
+	height: 50px;
 }
 
 .thumbnail {
@@ -635,6 +663,7 @@ footer nav ul li {
 	border-radius: 8px;
 	width: 100%;
 	max-width: 500px;
+	z-index: 7;
 }
 
 .modal-gallery, .modal-edit-work {
@@ -643,18 +672,14 @@ footer nav ul li {
 	align-items: center;
 }
 
+#modal-edit {
+	z-index: 6 !important;
+}
+
 .modal-gallery .moda-title {
 	font-size: 18px;
 	font-weight: bold;
 	margin-bottom: 20px;
-}
-
-.modal-gallery  {
-	position: absolute;
-	top: 10px;
-	right: 10px;
-	cursor: pointer;
-	font-size: 24px;
 }
 
 .modal-close {
@@ -680,9 +705,10 @@ footer nav ul li {
 	color: white;
 	border: none;
 	padding: 10px 20px;
-	border-radius: 4px;
+	border-radius: 20px;
 	cursor: pointer;
-	margin-top: 10px;
+	margin-top: 20rem;
+	width: 237px;
 	font-size: 16px;
 }
 
@@ -691,6 +717,12 @@ footer nav ul li {
 	flex-direction: column;
 	align-items: center;
 	gap: 15px;
+	background-color: #E8F1F6;
+	width: 420px;
+	height: 169px;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 10px;
 }
 
 
@@ -715,6 +747,21 @@ footer nav ul li {
 
 #new-image {
 	cursor: pointer;
+	background-color: #CBD6DC;
+	border-radius: 15px;
+	width: 173px;
+	height: 36px;
+	font-size:14px ;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #306685;
+}
+
+#photo-size {
+	font-size: 10px;
+	margin-bottom: 20px ;
 }
 
 #submit-new-work {
@@ -723,12 +770,18 @@ footer nav ul li {
 	border: none;
 	border-radius: 4px;
 	cursor: pointer;
+	background-color: #A7A7A7;
+	border-radius: 20px;
+	width: 230px;
 }
 
 #photo-add-icon {
 	font-size: 48px;
 	color: #ccc;
 	cursor: pointer;
+	height: 76px;
+	width: 76px;
+	margin-top: 20px;
 }
 
 .choice-category {
@@ -740,9 +793,9 @@ footer nav ul li {
 
 
 hr {
-	width: 0;
-	margin-top: 15px;
-	margin-bottom: 40px;
+	display: inline-flex;
+	width: 420px;
+	margin-top: 50px;
 }
 
 .add-picture {
@@ -773,23 +826,66 @@ hr {
 	align-items: center;
 	top: 0;
 	left: 0;
-	z-index: 1000;
+	z-index: 998;
 	width: 100%;
 	height: 100%;
 	background-color: rgba(0, 0, 0, 0.05);
 }
 
 #modal-works, #modal-edit {
+	font-size: 24px;
 	background-color: #fff;
-	padding: 40px;
 	border-radius: 10px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.02);
 	width: 630px;
-	max-width: 900px;
-	height: 680px;
-	max-height: 90vh;
+	height: 670px;
+	position: absolute;
+	z-index: 7;
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: flex-start;
 	flex-direction: column;
-	}
+}
+
+#title-modal-overlay {
+	margin-top: 60px;
+}
+
+
+.modal-title {
+	text-align: center;
+}
+
+.image-container {
+	position: relative;
+	 display: inline-block;
+	/*margin: 10px; */
+	border: 1px solid blue;
+	z-index: 1;
+}
+
+.delete-btn {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	border: none;
+	cursor: pointer;
+	padding: 5px;
+	border-radius: 50%;
+	background-color: rgba(255, 255, 255, 0.8);
+	z-index: 1000;
+	display: block;
+	border: 2px solid red;
+	background: transparent;
+	transition: opacity 0.3s ease;
+}
+
+.delete-btn i {
+	color: red;
+	font-size: 20px;
+}
+
+.delete-btn.hidden {
+	display: none;
+	opacity: 0;
+}
