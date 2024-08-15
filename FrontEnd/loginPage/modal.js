@@ -4,7 +4,7 @@
     const modalEdit = document.getElementById("modal-edit");
     const closeModalButtons = document.querySelectorAll(".modal-close, #button, #arrow-return");
     const openModalButton = document.getElementById("edit-button");
-    const addPhotoBtn = document.getElementById("modal-edit-add");
+    const addPhotoBtn = document.getElementById("modal-edit-add");    
     const thumbnailGallery = document.querySelector(".modal-content");
     const form = document.getElementById("modal-edit-new-photo");
     const fileInput = document.getElementById("form-image");
@@ -13,28 +13,7 @@
     const categorySelect = document.getElementById("form-category");
 
     const token = localStorage.getItem("authToken");
-    const imageContainers = document.querySelectorAll('.image-container');
-
-    imageContainers.forEach(container => {
-        console.log("container trouvé");
-        
-        const deleteBtn = document.createElement("button");
-        deleteBtn.className = 'delete-btn';
-        deleteBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
-        console.log("bouton de suppression créer");
-        
-
-        deleteBtn.addEventListener('click', () => {
-            console.log("bouton de suppression cliqué");
-            if (confirm ("Voulez vous vraiment supprimer cette photo?")) {
-                container.remove();
-            }
-            
-            
-        });
-
-        container.appendChild(deleteBtn)
-        })
+   
     //Fonction pour afficher la modale 
     function showModal() {
         modalOverlay.classList.remove("hide");
@@ -68,9 +47,12 @@ if (openModalButton) {
 
     // Passer à la modal d'ajout de photo
     addPhotoBtn.addEventListener("click", () => {
+        console.log("bouton ajouter une photo");
+        
         modalWorks.classList.add("hide");
         modalEdit.classList.remove("hide");
     });
+
 
     // Charger les catégories dans le formulaire d'ajout
     async function loadCategories() {
@@ -103,18 +85,36 @@ if (openModalButton) {
             const works = await response.json();
             thumbnailGallery.innerHTML = ""; // Vider la galerie précédente
             works.forEach(work => {
+                const workContainer = document.createElement("div");
+                workContainer.className = "work-container";
+
+
                 const img = document.createElement("img");
                 img.src = work.imageUrl;
                 img.alt = work.title;
                 img.classList.add("thumbnail");
+
+                const trashDiv = document.createElement("div");
+                trashDiv.className = "trash-div";
+
+                const trashCan = document.createElement("i");
+                trashCan.classList.add("fa-solid", "fa-trash-can");
     
-                img.addEventListener("click", () => {
-                    if (confirm("Voulez-vous vraiment supprimer cette photo ?")) {
+                trashCan.addEventListener("click",() => {
+                    if(confirm("Voulez-vous vraiment supprimer cette photo?")) {
                         deleteWork(work.id);
                     }
-                });
-    
-                thumbnailGallery.appendChild(img);
+                })
+                // img.addEventListener("click", () => {
+                //     if (confirm("Voulez-vous vraiment supprimer cette photo ?")) {
+                //         deleteWork(work.id);
+                //     }
+                // });
+
+                thumbnailGallery.appendChild(workContainer);
+                workContainer.appendChild(img);
+                workContainer.appendChild(trashDiv);
+                trashDiv.appendChild(trashCan)
             });
         } catch (error) {
             console.error("Erreur lors du chargement des miniatures :", error);
@@ -165,4 +165,27 @@ if (openModalButton) {
             }
         });
     }
-})
+});
+
+// let img = document.createElement("img");
+// let file;
+// document.querySelector("#file").style.display = "none";
+// document.getElementById("file").addEventListener("change", function (event) {
+//     file = event.target.files[0]; 
+//     // Assignez le fichier à une variable globale
+//     if (file && (file.type === "image/jpeg" || file.type === "image/png")) {
+//         const reader = new FileReader();
+//         reader.onload = function (e) {
+//             img.src = e.target.result;
+//             img.alt = "Uploaded Photo";
+//             document.getElementById("photo-container").appendChild(img);
+//         };
+//         reader.readAsDataURL(file);
+//         document
+//             .querySelectorAll(".picture-loaded")
+//             .forEach((e) => (e.style.display = "none"));
+//     } else {
+//         alert("Veuillez sélectionner une image au format JPG ou PNG.");
+//     }
+// });
+
