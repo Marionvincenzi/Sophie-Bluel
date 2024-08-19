@@ -1,4 +1,4 @@
-    document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
     const modalOverlay = document.getElementById("modal");
     const modalWorks = document.getElementById("modal-works");
     const modalEdit = document.getElementById("modal-edit");
@@ -10,6 +10,7 @@
     const fileInput = document.getElementById("form-image");
     const titleInput = document.getElementById("form-title");
     const modal = document.getElementById('modal');
+    const photoPreview = document.getElementById("photo-preview")
     const categorySelect = document.getElementById("form-category");
 
     const token = localStorage.getItem("authToken");
@@ -167,25 +168,29 @@ if (openModalButton) {
     }
 });
 
-// let img = document.createElement("img");
-// let file;
-// document.querySelector("#file").style.display = "none";
-// document.getElementById("file").addEventListener("change", function (event) {
-//     file = event.target.files[0]; 
-//     // Assignez le fichier à une variable globale
-//     if (file && (file.type === "image/jpeg" || file.type === "image/png")) {
-//         const reader = new FileReader();
-//         reader.onload = function (e) {
-//             img.src = e.target.result;
-//             img.alt = "Uploaded Photo";
-//             document.getElementById("photo-container").appendChild(img);
-//         };
-//         reader.readAsDataURL(file);
-//         document
-//             .querySelectorAll(".picture-loaded")
-//             .forEach((e) => (e.style.display = "none"));
-//     } else {
-//         alert("Veuillez sélectionner une image au format JPG ou PNG.");
-//     }
-// });
+let img = document.createElement('img');
+let file;
 
+//événement pour le label "new-image"
+document.getElementById("new-image").addEventListener("click", function() {
+    document.getElementById("form-image").click();
+});
+
+//événement pour l'input de fichier
+document.getElementById("form-image").addEventListener("change" , function (event) {
+    file = event.target.files[0];
+    //Assignez le fichier à une variable globale 
+    if (file && (file.type === "image/jpg" || file.type === "image/png")) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            img.src = e.target.result;
+            img.alt = "Uploaded Photo";
+            document.getElementById("photo-preview").appendChild(img);
+        };
+        reader.readAsDataURL(file);
+        //Masque les éléments HTML avec la classe "new-image".
+        document.querySelectorAll(".new-image").forEach(e => e.style.display = "none");
+    } else {
+        alert("Veuillez sélectionner une image en format JPG ou PNG.");
+    }
+})

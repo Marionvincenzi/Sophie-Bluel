@@ -525,13 +525,17 @@ footer nav ul li {
 	width: 21px;
 	height: 21px;
 	margin: 26px 30px;
+	position: absolute;
+	left: 0;
 }
 
 .fa-solid.fa-xmark {
 	color: #000;
 	width: 24px; 
 	height: 24px;
-	margin: 26px 30px; 
+	margin: 26px 30px;
+	position: absolute;
+	right: 0; 
 
 }
 .modal-overlay {
@@ -678,6 +682,12 @@ footer nav ul li {
 	align-items: center;
 }
 
+.modal-edit-work, .modal-gallery {
+	z-index: 1000;
+	display: none;
+}
+
+
 #modal-edit {
 	z-index: 6 !important;
 }
@@ -739,6 +749,7 @@ footer nav ul li {
 	justify-content: space-between;
 	margin-top: 20px;
 }
+
 
 .modal-add {
 	color: white;
@@ -852,7 +863,7 @@ footer nav ul li {
 	width: 630px;
 	height: 670px;
 	position: absolute;
-	z-index: 7;
+	z-index: 1000;
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
@@ -866,6 +877,7 @@ footer nav ul li {
 
 .modal-title {
 	text-align: center;
+	margin-top: 60px;
 }
 
 .work-container {

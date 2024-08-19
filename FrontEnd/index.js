@@ -183,7 +183,7 @@ async function main() {
         window.location.href = "index.html"
     });
 
-    const addPhotoSection = document.getElementById("modal-edit");
+    const addPhotoSection = document.getElementById("arrow-return");
     addPhotoSection.style.display = token ? "block" : "none";
 
     
