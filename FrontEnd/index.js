@@ -3,52 +3,34 @@ const urlCategories ="http://localhost:5678/api/categories";
 const filters = document.querySelector(".filters");
 
 
-// async function getWorks() {
-//     try {
-//         const response = await fetch(worksUrl);
-//         if (!response.ok) {
-//             throw new Error(`HTTP error! status: ${response.status}`);
-//         }
-//         const dataWorks = await response.json();
-//         console.log(dataWorks);
-//         return dataWorks;
-//     } catch (error) {
-//         console.error("Erreur lors de la récupération des travaux", error);
-//         return [];
-        
-//     }
-// }
-
-function getWorks() {
-
-    return fetch("http://localhost:5678/api/works")
-    .then(response => response.json())
-    .then(data => {
+async function getWorks() {
+    const response = await fetch(worksUrl)
+    .then((response) => response.json())
+    .then((data) => {
         console.log(data);
         displayWorks(data);
     })
-    .catch(error => {
-        console.log(error)
-    })
+    .catch((error) => {
+        console.log(error);
+    });
 }
-
-getWorks()
+getWorks();
 
 //Fonction pour afficher les travaux 
 function displayWorks(works) {
     const gallery = document.querySelector(".gallery");
     gallery.innerHTML = "";
-
+    
     works.forEach(work => {
         const figure = document.createElement("figure");
         const img = document.createElement("img");
         const figcaption = document.createElement("figcaption");
-
+        
         figure.classList.add(`figure-${work.id}`);
         img.src = work.imageUrl;
         img.alt = work.title || "Image";
         figcaption.innerText = work.title;
-
+        
         figure.appendChild(img);
         figure.appendChild(figcaption);
         gallery.appendChild(figure);
@@ -56,21 +38,21 @@ function displayWorks(works) {
 }
 //Fonction pour récupérer les catégories 
 async function getCategories() {
-    const works = await getWorks();
-    const categories = await getCategories()
     try {
         const response = await fetch(urlCategories);
         if (!response.ok) {
             throw new Error(`HTTP error! status ${response.status}`);
         }
         const dataCategories = await response.json();
-        console.log(dataCategories);
+        console.log('catégories récupérer');
         return dataCategories
     } catch (error) {
         console.error("Erreur lors de la récupération des catégories :", error);
         return[];
     }
 }
+
+
 
 
 
@@ -81,13 +63,11 @@ function displayfilters(categories) {
     const divBtn = document.createElement("div");
     divBtn.classList.add("divBtn");
 
-    const token = localStorage.getItem("authToken")
     title.insertBefore(divBtn, subTitle);
-
-    const gallery = document.querySelector(".gallery")
+    
+    const gallery = document.querySelector(".gallery");
     const btnAll = document.createElement("button");
-    btnAll.classList.add("filterButton","btnAll");
-    btnAll.classList.add("active");
+    btnAll.classList.add("filterButton","btnAll","active");
     btnAll.innerText = "TOUS";
     btnAll.addEventListener("click", () => {
         gallery.innerHTML = "";
@@ -95,20 +75,20 @@ function displayfilters(categories) {
         handleFilterButton("btnAll");
     });
     divBtn.appendChild(btnAll);
-
+    
     function handleFilterButton(button) {
         document.querySelectorAll(".filterButton").forEach(btn => btn.classList.remove("active"));
         button.classList.add("active");
-
-    btnAll.addEventListener("click", () => {
-        handleFilterButton(btnAll);
-        gallery.innerHTML = "";
-        getWorks().then(displayWorks);
-        })
+        
+        // btnAll.addEventListener("click", () => {
+        //     handleFilterButton(btnAll);
+        //     gallery.innerHTML = "";
+        //     getWorks().then(displayWorks);
+        // })
     }
-
     
-
+    
+    
     categories.forEach(category => {
         const btn = document.createElement("button");
         btn.classList.add("filterButton");
@@ -119,6 +99,7 @@ function displayfilters(categories) {
                 const filterWorks = works.filter(work => work.categoryId === category.id);
                 displayWorks(filterWorks);
             });
+            handleFilterButton(btn);
         });
         divBtn.appendChild(btn);
     });
@@ -128,25 +109,27 @@ function displayfilters(categories) {
 
 // Fonction principale pour récupérer les données et les afficher
 async function main() {
+   
     const works = await getWorks();
-    displayWorks(works);
     const categories = await getCategories();
 
-    if (works.length > 0 && categories.length > 0) {
+    if (Array.isArray(works) && works.length > 0 && Array.isArray(categories) && categories.length > 0) {
+    // if (works.length > 0 && categories.length > 0) {
         console.log("Récupération des travaux et des catégories avec succès !");
         displayWorks(works);
         displayfilters(categories);
     } else {
         console.error("Une erreur s'est produite lors de la récupération des travaux er des catégories");
     }
-}
+};
 
-  document.addEventListener("DOMContentLoaded", () => {
-      const loginButton = document.getElementById("only-guest");
-      const logoutButton = document.getElementById("nav-logout");
-      const adminBar = document.getElementById("banner-modifier");
-      const editButton = document.getElementById("edit-button");
-      const token = localStorage.getItem("authToken");
+
+document.addEventListener("DOMContentLoaded", () => {
+    const loginButton = document.getElementById("only-guest");
+    const logoutButton = document.getElementById("nav-logout");
+    const adminBar = document.getElementById("banner-modifier");
+    const editButton = document.getElementById("edit-button");
+    const token = localStorage.getItem("authToken");
 
     if (!loginButton || !logoutButton ||!adminBar ) {
         console.error("Les éléments avec les ID n'ont pas été trouvée");
@@ -186,25 +169,8 @@ async function main() {
     const addPhotoSection = document.getElementById("arrow-return");
     addPhotoSection.style.display = token ? "block" : "none";
 
-    
-    // if (token) {
-        
-    //     addPhotoSection.style.display ="block";
-    // } else {
-    //     addPhotoSection.style.display ="none";
-    //     }
   });
 
 //Appel à la fonction principale 
-// main();
+main()
 
-/*****Création des bouton dynamiquement******/
-/*Boucle for pour creer les bouton par catégorie*/
-// function createAllButtons() {
-//     getCategories().then((data) => {
-//       // console.log(data);
-//       data.forEach((category) => {
-//         createButton(category);
-//       });
-//     });
-//   }

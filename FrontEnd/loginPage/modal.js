@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const modalWorks = document.getElementById("modal-works");
     const modalEdit = document.getElementById("modal-edit");
     const closeModalButtons = document.querySelectorAll(".modal-close, #button, #arrow-return");
+    const returnModal = document.getElementById("arrow-return");
     const openModalButton = document.getElementById("edit-button");
     const addPhotoBtn = document.getElementById("modal-edit-add");    
     const thumbnailGallery = document.querySelector(".modal-content");
@@ -12,8 +13,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const modal = document.getElementById('modal');
     const photoPreview = document.getElementById("photo-preview")
     const categorySelect = document.getElementById("form-category");
-
     const token = localStorage.getItem("authToken");
+
+
    
     //Fonction pour afficher la modale 
     function showModal() {
@@ -45,6 +47,7 @@ if (openModalButton) {
     closeModalButtons.forEach(button => {
         button.addEventListener("click", hideModal);
     });
+    
 
     // Passer à la modal d'ajout de photo
     addPhotoBtn.addEventListener("click", () => {
@@ -54,6 +57,7 @@ if (openModalButton) {
         modalEdit.classList.remove("hide");
     });
 
+    returnModal.addEventListener("click", showModal);
 
     // Charger les catégories dans le formulaire d'ajout
     async function loadCategories() {
