@@ -137,13 +137,7 @@ if (openModalButton) {
         formData.append("title", titleInput.value);
         formData.append("categoryId", categorySelect.value);
 
-        console.log(fileInput.files[0]);
-        console.log(titleInput.value);
-        console.log(categorySelect.value);
         
-        
-        
-
         fetch("http://localhost:5678/api/works", {
             method: "POST",
             headers: {
