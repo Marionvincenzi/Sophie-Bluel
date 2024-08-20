@@ -2,19 +2,15 @@ const worksUrl = "http://localhost:5678/api/works";
 const urlCategories ="http://localhost:5678/api/categories";
 const filters = document.querySelector(".filters");
 
-
 async function getWorks() {
-    const response = await fetch(worksUrl)
-    .then((response) => response.json())
-    .then((data) => {
-        console.log(data);
-        displayWorks(data);
-    })
-    .catch((error) => {
-        console.log(error);
-    });
+    const response = await fetch(worksUrl);
+    if (response.ok) {
+        return response.json();
+    } else {
+        console.error('HTTP error ! status ${response.status}');
+        return[];
+    }
 }
-getWorks();
 
 //Fonction pour afficher les travaux 
 function displayWorks(works) {
@@ -36,18 +32,14 @@ function displayWorks(works) {
         gallery.appendChild(figure);
     });
 }
-//Fonction pour récupérer les catégories 
+
+
 async function getCategories() {
-    try {
-        const response = await fetch(urlCategories);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status ${response.status}`);
-        }
-        const dataCategories = await response.json();
-        console.log('catégories récupérer');
-        return dataCategories
-    } catch (error) {
-        console.error("Erreur lors de la récupération des catégories :", error);
+    const response = await fetch (urlCategories);
+    if (response.ok) {
+        return response.json();
+    } else {
+        console.error('HTTP error ! status ${response.status}');
         return[];
     }
 }
@@ -78,13 +70,8 @@ function displayfilters(categories) {
     
     function handleFilterButton(button) {
         document.querySelectorAll(".filterButton").forEach(btn => btn.classList.remove("active"));
-        button.classList.add("active");
+        // button.classList.add("active");
         
-        // btnAll.addEventListener("click", () => {
-        //     handleFilterButton(btnAll);
-        //     gallery.innerHTML = "";
-        //     getWorks().then(displayWorks);
-        // })
     }
     
     
@@ -112,12 +99,15 @@ async function main() {
    
     const works = await getWorks();
     const categories = await getCategories();
+    const token = localStorage.getItem('authToken');
 
     if (Array.isArray(works) && works.length > 0 && Array.isArray(categories) && categories.length > 0) {
-    // if (works.length > 0 && categories.length > 0) {
         console.log("Récupération des travaux et des catégories avec succès !");
         displayWorks(works);
+
+       if (!token) { 
         displayfilters(categories);
+     }
     } else {
         console.error("Une erreur s'est produite lors de la récupération des travaux er des catégories");
     }
@@ -130,6 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const adminBar = document.getElementById("banner-modifier");
     const editButton = document.getElementById("edit-button");
     const token = localStorage.getItem("authToken");
+    
 
     if (!loginButton || !logoutButton ||!adminBar ) {
         console.error("Les éléments avec les ID n'ont pas été trouvée");

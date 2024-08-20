@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const token = localStorage.getItem("authToken");
 
 
+
    
     //Fonction pour afficher la modale 
     function showModal() {
@@ -129,10 +130,19 @@ if (openModalButton) {
     // Gérer l'ajout d'une nouvelle photo
     form.addEventListener("submit", (e) => {
         e.preventDefault();
+        console.log("form submitted");
+        
         const formData = new FormData();
         formData.append("image", fileInput.files[0]);
         formData.append("title", titleInput.value);
         formData.append("categoryId", categorySelect.value);
+
+        console.log(fileInput.files[0]);
+        console.log(titleInput.value);
+        console.log(categorySelect.value);
+        
+        
+        
 
         fetch("http://localhost:5678/api/works", {
             method: "POST",
@@ -142,11 +152,15 @@ if (openModalButton) {
             body: formData
         })
         .then(response => {
+            console.log(response);
+            
             if (response.ok) {
                 alert("Photo ajoutée avec succès !");
                 loadThumbnails(); // Recharger les miniatures après ajout
                 modalWorks.classList.remove("hide");
                 modalEdit.classList.add("hide");
+                photoPreview.innerHTML="";
+                form.reset();
             } else {
                 console.error("Erreur lors de l'ajout de la photo.");
             }
@@ -198,3 +212,4 @@ document.getElementById("form-image").addEventListener("change" , function (even
         alert("Veuillez sélectionner une image en format JPG ou PNG.");
     }
 })
+
