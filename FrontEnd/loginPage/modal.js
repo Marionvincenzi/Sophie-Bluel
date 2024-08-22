@@ -7,10 +7,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const openModalButton = document.getElementById("edit-button");
     const addPhotoBtn = document.getElementById("modal-edit-add");    
     const thumbnailGallery = document.querySelector(".modal-content");
-    const form = document.getElementById("modal-edit-new-photo");
+    const form = document.querySelector(".modal-content-new-category-title");
     const fileInput = document.getElementById("form-image");
     const titleInput = document.getElementById("form-title");
-    const modal = document.getElementById('modal');
     const photoPreview = document.getElementById("photo-preview")
     const categorySelect = document.getElementById("form-category");
     const token = localStorage.getItem("authToken");
@@ -23,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
         modalOverlay.classList.remove("hide");
         modalOverlay.style.display = "flex";
         modalWorks.classList.remove("hide");
-        console.log("Modal ouverte");
+        modalEdit.style.display = "hide";
         loadThumbnails();
         loadCategories();
     }
@@ -35,6 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
         modalWorks.classList.add("hide");
         modalEdit.classList.add("hide");
         console.log("Modal fermée");
+        window.location.reload();
     }
 
 //Ouvrir la modale 
@@ -135,7 +135,7 @@ if (openModalButton) {
         const formData = new FormData();
         formData.append("image", fileInput.files[0]);
         formData.append("title", titleInput.value);
-        formData.append("categoryId", categorySelect.value);
+        formData.append("category", categorySelect.value);
 
         
         fetch("http://localhost:5678/api/works", {
@@ -192,7 +192,7 @@ document.getElementById("new-image").addEventListener("click", function() {
 document.getElementById("form-image").addEventListener("change" , function (event) {
     file = event.target.files[0];
     //Assignez le fichier à une variable globale 
-    if (file && (file.type === "image/jpg" || file.type === "image/png")) {
+    if (file && (file.type === "image/jpg" || file.type === "image/png" || file.type === "image/jpeg")) {
         const reader = new FileReader();
         reader.onload = function(e) {
             img.src = e.target.result;

@@ -48,7 +48,6 @@ table {
 }
 /** end reset css**/
 body {
-	max-width: 1140px;
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
@@ -676,7 +675,6 @@ footer nav ul li {
 	padding: 20px;
 	border-radius: 8px;
 	width: 100%;
-	max-width: 500px;
 	z-index: 7;
 }
 
@@ -866,7 +864,7 @@ footer nav ul li {
 	background-color: #fff;
 	border-radius: 10px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.02);
-	width: 630px;
+	width: 630px !important;
 	height: 670px;
 	position: absolute;
 	z-index: 1000;
