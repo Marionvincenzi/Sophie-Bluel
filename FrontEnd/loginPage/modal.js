@@ -111,11 +111,7 @@ if (openModalButton) {
                         deleteWork(work.id);
                     }
                 })
-                // img.addEventListener("click", () => {
-                //     if (confirm("Voulez-vous vraiment supprimer cette photo ?")) {
-                //         deleteWork(work.id);
-                //     }
-                // });
+
 
                 thumbnailGallery.appendChild(workContainer);
                 workContainer.appendChild(img);
@@ -164,6 +160,8 @@ if (openModalButton) {
 
     // Supprimer une photo
     function deleteWork(id) {
+        console.log(token,id);
+        
         fetch(`http://localhost:5678/api/works/${id}`, {
             method: "DELETE",
             headers: {
@@ -171,6 +169,8 @@ if (openModalButton) {
             }
         })
         .then(response => {
+            console.log(response);
+            
             if (response.ok) {
                 loadThumbnails(); // Recharger les miniatures après suppression
             } else {
